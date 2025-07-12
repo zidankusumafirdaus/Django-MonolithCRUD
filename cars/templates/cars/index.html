@@ -1,0 +1,17 @@
+{% extends 'cars/base.html' %}
+
+{% load static %}
+
+{% block title %}{{ appType }} | Car Project{% endblock %}
+
+{% block content %}
+  <h1>{{ appType }} | Car Project</h1>
+  <h3>Demo:
+    <a href="{% url 'createcar' %}">Create</a> /
+    <a href="{% url 'readcar' %}">Read</a> /
+    <a href="{% url 'deletecar' %}">Delete</a> /
+    <a href="{% url 'searchcar' %}">Search</a> /
+    <a href="{% url 'help' %}">Help</a> /
+    <a href="{% url 'updatecarinput' %}">Update</a>
+  </h3>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ appType }} | Input Car ID to Update</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>{{ appType }} | Update Car by ID</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="car_id">Enter Car ID to Update:</label>
+        <input type="number" class="form-control" id="car_id" name="car_id" value="{{ query|default_if_none:'' }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Go to Update</button>
+    </form>
+
+    {% if not_found %}
+      <div class="alert alert-warning mt-3">
+        No results found for "{{ query }}".
+      </div>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'index' %}">Back to Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ appType }} | Car Project</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{ appType }} | Car Project</h1>
+        <h3>Demo:
+          <a href="{% url 'createcar' %}">Create</a> /
+          <a href="{% url 'readcar' %}">Read</a> /
+          <a href="{% url 'deletecar' %}">Delete</a> /
+          <a href="{% url 'searchcar' %}">Search</a> /
+          <a href="{% url 'help' %}">Help</a> /
+          <a href="{% url 'updatecarinput' %}">Update</a>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Update Car Data</h4>
+        <form method="POST" action="{% url 'updatecar' car.id %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="carName">Name</label>
+            <input type="text" class="form-control" id="carName" name="carName" value="{{ car.carname }}" required>
+          </div>
+          <div class="form-group">
+            <label for="carBrand">Brand</label>
+            <input type="text" class="form-control" id="carBrand" name="carBrand" value="{{ car.carbrand }}" required>
+          </div>
+          <div class="form-group">
+            <label for="carModel">Model</label>
+            <input type="text" class="form-control" id="carModel" name="carModel" value="{{ car.carmodel }}" required>
+          </div>
+          <div class="form-group">
+            <label for="carPrice">Price</label>
+            <input type="text" class="form-control" id="carPrice" name="carPrice" value="{{ car.carprice }}" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

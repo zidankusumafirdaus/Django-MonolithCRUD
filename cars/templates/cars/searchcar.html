@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ appType }} | Car Project</title>
+
+    <meta name="description" content="Example Monolith">
+    <meta name="author" content="@hepidad">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ appType }} | Car Project</h1>
+          <h3>Demo:
+            <a href="{% url 'createcar' %}">Create</a> /
+            <a href="{% url 'readcar' %}">Read</a> /
+            <a href="{% url 'deletecar' %}">Delete</a> /
+            <a href="{% url 'searchcar' %}">Search</a> /
+            <a href="{% url 'help' %}">Help</a> /
+            <a href="{% url 'updatecarinput' %}">Update</a>
+          </h3>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <h4>Search Car Data</h4>
+          <form method="get" action="{% url 'searchcar' %}" class="form-inline mb-3">
+            <input type="text" name="q" class="form-control mr-2" placeholder="Enter car name or brand..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+
+          {% if results %}
+            <h5>Search Results:</h5>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Model</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for car in results %}
+                  <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.carname }}</td>
+                    <td>{{ car.carbrand }}</td>
+                    <td>{{ car.carmodel }}</td>
+                    <td>{{ car.carprice }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% elif query %}
+            <div class="alert alert-warning">No results found for "{{ query }}".</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
